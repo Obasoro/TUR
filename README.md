@@ -38,3 +38,18 @@ depends_on
 ```
 
 ### Deploying a Cluster of Web Servers
+```A single server create rom fo failure```
+
+```
+Application Load Balancer (ALB)
+Best suited for load balancing of HTTP and HTTPS traffic. Operates at the
+application layer (Layer 7) of the OSI model.
+```
+
+```
+Network Load Balancer (NLB)
+Best suited for load balancing of TCP, UDP, and TLS traffic. Can scale up and
+down in response to load faster than the ALB (the NLB is designed to scale to
+tens of millions of requests per second). Operates at the transport layer (Layer
+4) of the OSI model.
+```
