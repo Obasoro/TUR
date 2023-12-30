@@ -53,3 +53,10 @@ down in response to load faster than the ALB (the NLB is designed to scale to
 tens of millions of requests per second). Operates at the transport layer (Layer
 4) of the OSI model.
 ```
+
+### Understanding how Terraform Manages State and Files 3
+
+- What is terraform state
+- shared storage afor stae files
+- limitation with Terraform backend
+- Isolating stae files
