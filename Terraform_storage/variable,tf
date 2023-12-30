@@ -1,0 +1,15 @@
+# variable "bucket_name"{
+#     value = "bucket name" {
+#         type = "string
+#         description = "bucket name"
+#     }
+# }
+
+# variable "region" {
+#     type = string 
+# }
+
+# variable "table_name" {
+#     type = string
+#     description = "Name for the dynamoDb"
+# }

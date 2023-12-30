@@ -61,14 +61,9 @@ resource "aws_dynamodb_table" "terraform_lock" {
 # Storing tour information in remote backend
 
 # Always create your s3 bucket first become adding the remote backend
-# terraform {
-#   backend "s3" {
-#     bucket = "kunle-storage-tur"
-#     key    = "global/s3/terraform.tfstate"
-#     region = "us-east-1"
 
-#     dynamodb_table = "kunle-tur"
-#     encrypt        = true
-#   }
-# }
-
+terraform {
+  backend "s3" {
+    key    = "webserver/terraform.tfstate"
+  }
+}

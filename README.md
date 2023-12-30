@@ -60,3 +60,28 @@ tens of millions of requests per second). Operates at the transport layer (Layer
 - shared storage afor stae files
 - limitation with Terraform backend
 - Isolating stae files
+
+```
+Limitations with Terraform’s Backends
+when experiencing this error, delete the state, lock file on the local system and reinitialize
+
+Error: Backend initialization required, please run "terraform init"
+│ 
+│ Reason: Unsetting the previously set backend "s3"
+│ 
+│ The "backend" is the interface that Terraform uses to store state,
+│ perform operations, etc. If this message is showing up, it means that the
+│ Terraform configuration you're using is using a custom configuration for
+│ the Terraform backend.
+│ 
+│ Changes to backend configurations require reinitialization. This allows
+│ Terraform to set up the new configuration, copy existing state, etc. Please run
+│ "terraform init" with either the "-reconfigure" or "-migrate-state" flags to
+│ use the current configuration.
+│ 
+│ If the change reason above is incorrect, please verify your configuration
+│ hasn't changed and try again. At this point, no changes to your existing
+│ configuration or state have been made.
+╵
+
+```
