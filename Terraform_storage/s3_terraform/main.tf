@@ -62,8 +62,14 @@ resource "aws_dynamodb_table" "terraform_lock" {
 
 # Always create your s3 bucket first become adding the remote backend
 
-terraform {
-  backend "s3" {
-    key    = "webserver/terraform.tfstate"
+
+ terraform {
+   backend "s3" {
+#     bucket = "kunle-storage-tur"
+#     dynamodb_table = "kunle-tur"
+#     region = "us-east-1"
+#     encrypt = true
+     key    = "webserver/terraform.tfstate"
+
   }
-}
+ }
