@@ -26,7 +26,7 @@ variable "alb_security_group_name" {
 
 variable "db_remote_state_bucket" {
   description = "The Name of the remote state"
-  type = "string"
+  type = string
 
 }
 
