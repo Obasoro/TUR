@@ -8,7 +8,7 @@ terraform {
 }
 
 module "webserver_cluster" {
-  source = "../Terraform_storage/modules/services/webserver-cluster"
+  source = "../../modules/services/webserver-cluster"
 }
 
 provider "aws" {
@@ -33,7 +33,7 @@ resource "aws_instance" "webserver" {
 }
 
 resource "aws_security_group" "webserver_sg" {
-  name = "terraform_security_group"
+  name = ${var.cluster_name}-webserver_sg
 
   ingress {
     from_port   = var.server_port
@@ -55,7 +55,7 @@ resource "aws_autoscaling_group" "webserver" {
 
   tag {
     key                 = "Name"
-    value               = "terraform-asg-webserver"
+    value               = var.cluster_name
     propagate_at_launch = true
   }
 }
@@ -132,7 +132,7 @@ resource "aws_security_group" "alb" {
 }
 
 resource "aws_lb_target_group" "asg" {
-  name     = "terraform-asg-webserver"
+  name     = var.cluster_name
   port     = var.server_port
   protocol = "HTTP"
   vpc_id   = data.aws_subnets.default.id

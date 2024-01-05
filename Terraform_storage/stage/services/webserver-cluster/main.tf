@@ -11,6 +11,12 @@ provider "aws" {
   region = "us-east-1"
 }
 
+module "webserver_cluster" {
+  source = "../../modules/services/webservers-stage"
+  db_remote_state_bucket  = "kunle-storage-tur"
+  db_remote_state_key = "stage/data-store/mysql/terraform.tfstate"
+}
+
 resource "aws_instance" "webserver" {
   ami                    = "ami-0c7217cdde317cfec"
   instance_type          = "t2.micro"
@@ -107,7 +113,7 @@ resource "aws_lb_listener" "http" {
 }
 
 resource "aws_security_group" "alb" {
-  name = "terraform-webserver-alb"
+  name = var.cluster.name
 
   # Allow inbound traffic
   ingress {

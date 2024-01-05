@@ -55,5 +55,3 @@ variable "db_remote_state_key" {
   description = "the path to the key in the remote state"
   type = string
 }
-
-
