@@ -18,7 +18,7 @@ terraform {
   backend "s3" {
 
     bucket         = "kunle-storage-tur"
-    key            = "stage/data-store/mysql/terrafoem.tfstate"
+    key            = "stage/data-store/mysql/terrafoam.tfstate"
     region         = "us-east-1"
     dynamodb_table = "kunle-tur"
     encrypt        = true

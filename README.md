@@ -85,3 +85,21 @@ Error: Backend initialization required, please run "terraform init"
 ╵
 
 ```
+
+```
+$ export TF_VAR_db_username="(YOUR_DB_USERNAME)"
+$ export TF_VAR_db_password="(YOUR_DB_PASSWORD)"
+And here is how you do it on Windows systems:
+$ set TF_VAR_db_username="(YOUR_DB_USERNAME)"
+$ set TF_VAR_db_password="(YOUR_DB_PASSWORD)"
+```
+
+```
+rror: Unable to find remote state
+│ 
+│   with data.terraform_remote_state.db,
+│   on main.tf line 164, in data "terraform_remote_state" "db":
+│  164: data "terraform_remote_state" "db" {
+│ 
+│ No stored state was found for the given workspace in the given backend.
+```
