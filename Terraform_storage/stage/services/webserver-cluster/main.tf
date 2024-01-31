@@ -6,13 +6,13 @@ terraform {
     }
   }
 }
-
+# Providers should be moved to the root module
 provider "aws" {
   region = "us-east-1"
 }
 
 module "webserver_cluster" {
-  source = "../../modules/services/webservers-stage"
+  source = "../../../modules/services/webserver-stage"
   db_remote_state_bucket  = "kunle-storage-tur"
   db_remote_state_key = "stage/data-store/mysql/terraform.tfstate"
 }

@@ -29,7 +29,7 @@ resource "aws_instance" "webserver" {
 }
 
 resource "aws_security_group" "webserver_sg" {
-  name = ${var.cluster_name}-webserver_sg
+  name = "${var.cluster_name}-webserver_sg"
 
   ingress {
     from_port   = var.server_port
@@ -57,17 +57,28 @@ resource "aws_autoscaling_group" "webserver" {
 }
 resource "aws_launch_configuration" "webserver" {
   image_id        = "ami-0c7217cdde317cfec"
-  instance_type   = "t2.micro"
+  instance_type   = var.instance_type
   security_groups = [aws_security_group.webserver_sg.id]
 
-  user_data = <<-EOF
-                #!/bin/bash
-                echo "Hello World!" > inex.html
-                nohup busybox http -f -p $(var.server_port) &
-                EOF
+  user_data = templatefile("${path.module}/user-data.sh", {
+    server_port = var.server_port
+    db_address  = data.terraform_remote.db.outputs.address
+    db_port     = data.terraform_remote.db.outputs.port
+  })
+
   lifecycle {
     create_before_destroy = true
   }
+}
+
+resource "aws_security_group_rule" "allow_server_http_inbound" {
+  type              = "ingress"
+  security_group_id = aws_security_group.webserver_sg
+
+  from_port   = var.server_port
+  to_port     = var.server_port
+  protocol    = local.tcp_protocol
+  cidr_blocks = local.all_ips
 }
 
 
@@ -91,7 +102,7 @@ resource "aws_lb" "webserver" {
 
 resource "aws_lb_listener" "http" {
   load_balancer_arn = aws_lb.webserver.arn
-  port              = 80
+  port              = local.http_port
   protocol          = "HTTP"
 
   # By default, returns a simple 404 page
@@ -162,11 +173,11 @@ resource "aws_lb_listener_rule" "webserver" {
 }
 
 data "terraform_remote_state" "db" {
-    backend = "s3"
+  backend = "s3"
 
-    config = {
-        bucket = var.db_remote_state_bucket
-        key = var.db_remote_state_key
-        region = "us-east-1"
-    }
+  config = {
+    bucket = var.db_remote_state_bucket
+    key    = var.db_remote_state_key
+    region = "us-east-1"
+  }
 }

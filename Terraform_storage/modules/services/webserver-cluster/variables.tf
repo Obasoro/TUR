@@ -27,23 +27,27 @@ variable "alb_security_group_name" {
 
 
 variable "region" {
-  type = string
+  type        = string
   description = "Region where the remote state is stored"
-  default = "us-east-1"
+  default     = "us-east-1"
 }
 
 variable "cluster_name" {
   description = "The name to use for all the cluster resources"
-  type  = string
+  type        = string
 }
 
 variable "db_remote_state_bucket" {
   description = "the name of the bucket to use for all the remote state"
-  type = string
+  type        = string
 }
 
 variable "db_remote_state_key" {
   description = "the path to the key in the remote state"
-  type = string
+  type        = string
 }
 
+variable "instance_type" {
+  description = "The typr of EC2 instances to run (e.g. t2.micro)"
+  type        = string
+}
