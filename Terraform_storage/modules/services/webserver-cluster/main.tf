@@ -7,10 +7,6 @@ terraform {
   }
 }
 
-module "webserver_cluster" {
-  source = "../../modules/services/webserver-cluster"
-}
-
 provider "aws" {
   region = "us-east-1"
 }
@@ -111,7 +107,7 @@ resource "aws_lb_listener" "http" {
 }
 
 resource "aws_security_group" "alb" {
-  name = ${var.cluster_name}-alb
+  name = "${var.cluster_name}-alb"
 
   # Allow inbound traffic
   ingress {

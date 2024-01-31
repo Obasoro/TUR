@@ -24,16 +24,7 @@ variable "alb_security_group_name" {
   default     = "terraform-webserver-alb"
 }
 
-variable "db_remote_state_bucket" {
-  description = "The Name of the remote state"
-  type = string
 
-}
-
-variable "db_remote_state_key" {
-  description = "The name of the key in the remote state"
-  type = string
-}
 
 variable "region" {
   type = string
