@@ -31,7 +31,7 @@ data "terraform_remote_state" "db" {
 
   config = {
     bucket = "kunle-storage-tur"
-    key    = "stage/data-store/mysql/terrafoem.tfstate"
+    key    = "stage/data-store/mysql/terraform.tfstate"
     region = "us-east-1"
   }
 }

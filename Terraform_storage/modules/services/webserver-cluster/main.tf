@@ -74,6 +74,7 @@ resource "aws_launch_configuration" "webserver" {
 resource "aws_security_group_rule" "allow_server_http_inbound" {
   type              = "ingress"
   security_group_id = aws_security_group.webserver_sg.id
+  
 
   from_port   = var.server_port
   to_port     = var.server_port

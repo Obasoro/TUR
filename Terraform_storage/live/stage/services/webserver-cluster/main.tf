@@ -141,6 +141,16 @@ locals {
   all_ips = ["0.0.0.0/0"]
 }
 
+resource "aws_security_group_rule" "allow_testing_inbound" {
+  type = "ingress"
+  security_group_id = module.webserver_cluster.alb_security_group_id
+  from_port = 1234
+  to_port = 1234
+  protocol = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+ 
+}
+
 resource "aws_lb_target_group" "asg" {
   name     = "terraform-asg-webserver"
   port     = var.server_port
