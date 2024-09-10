@@ -24,7 +24,7 @@ resource "aws_instance" "webserver" {
 
   user_data                   = <<-EOF
                 #!/bin/bash
-                echo "Hello World!" > inex.html
+                echo "Hello World!" > index.html
                 nohup busybox http -f -p $(var.server_port) &
                 EOF
   user_data_replace_on_change = true
@@ -131,6 +131,14 @@ resource "aws_security_group" "alb" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+}
+
+locals {
+  http_port = 80
+  any_port = 0
+  any_protocol = "-1"
+  tcp_protocol = "tcp"
+  all_ips = ["0.0.0.0/0"]
 }
 
 resource "aws_lb_target_group" "asg" {

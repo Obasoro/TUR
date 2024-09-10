@@ -18,7 +18,7 @@ output "alb_security_group_id" {
   description = "The ID of the security Group"
 }
 
-output "asg_name" {
-  value = aws_autoscaling_group.webserver.name
-  description = "Name of the autoscale group that manages webservers."
-}
+# output "asg_name" {
+#   value = aws_autoscaling_group.webserver.name
+#   description = "Name of the autoscale group that manages webservers."
+# }
